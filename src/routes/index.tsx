@@ -27,6 +27,21 @@ function Index() {
     return () => clearTimeout(timer);
   }, [opening]);
 
+  useEffect(() => {
+    if (!opened || !('IntersectionObserver' in window)) return;
+    const sections = document.querySelectorAll('.content-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    sections.forEach((section) => { section.classList.add('reveal-on-scroll'); observer.observe(section); });
+    return () => observer.disconnect();
+  }, [opened]);
+
   return <div className="birthday-app">
     <header className="birthday-header">
       <a href="/" className="brand"><Heart size={17} /> <span>for Pavii<span className="brand-comma">,</span> with love</span></a>
@@ -35,6 +50,7 @@ function Index() {
     </header>
     {!opened ? <main className={`envelope-page ${opening ? 'is-opening' : ''}`}>
       <img className="paper-background" src={paper} alt="" width={1536} height={1024} />
+      <RomanticDetails />
       <div className="invitation-intro"><span className="eyebrow"><span /> TODAY IS ALL ABOUT YOU <span /></span>
         <h1>Happy birthday, <em>Pavii.</em></h1>
         <p>Some people make the world a little more beautiful.<br />You make mine.</p>
@@ -54,10 +70,11 @@ function Index() {
       <div className="invitation-bottom"><span className="tiny-sparkle">✧</span><span>MADE FOR ONE VERY SPECIAL PERSON</span><Heart size={12} /></div>
     </main> : <main className="opened-card">
       <section className="card-welcome"><img className="paper-background" src={paper} alt="" width={1536} height={1024} />
+        <RomanticDetails celebrate />
         <span className="eyebrow"><Sparkles size={14} /> YOUR DAY. YOUR LITTLE WORLD.</span>
         <span className="script-line">Here's to you, my love</span>
         <h1>Happy birthday,<br /><em>Pavii.</em><Heart className="welcome-heart" size={36} /></h1>
-        <p>To the girl who makes ordinary days feel extraordinary.<br />This little corner of the world is yours.</p>
+        <p>To the girl who makes ordinary days feel extraordinary.<br />{' '}This little corner of the world is yours.</p>
         <Button variant="ghost" className="scroll-cue" onClick={() => document.getElementById('letter')?.scrollIntoView({ behavior: 'smooth' })}>A little love, just below<ArrowDown size={18} /></Button>
       </section>
       <section className="love-letter content-section" id="letter"><span className="eyebrow">01 / A NOTE FROM MY HEART</span>
@@ -75,6 +92,12 @@ function Index() {
       <WishesWall />
       <footer className="birthday-footer"><Heart size={18} /><span>Made with love. Just for Pavii.</span><Button variant="ghost" size="sm" onClick={() => { setOpened(false); window.scrollTo(0, 0); }}><RotateCcw size={13} /> Back to the envelope</Button></footer>
     </main>}
+  </div>;
+}
+
+function RomanticDetails({ celebrate = false }: { celebrate?: boolean }) {
+  return <div className={`romantic-details ${celebrate ? 'celebrate' : ''}`} aria-hidden="true">
+    <Heart /><Sparkles /><Heart /><Flower2 /><Sparkles /><Heart />
   </div>;
 }
 

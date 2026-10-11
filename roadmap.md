@@ -3,4 +3,5 @@
 - [x] Build scrollable birthday message, little things, and celebration sections.
 - [x] Build named wishes wall and Firebase integration scaffold.
 - [x] Verify opening, form states, and page rendering.
+- [x] Refresh phone layouts and add lively romantic motion; verify envelope, card, and wishes on small screens.
 - [ ] Connect live wishes (blocked on user's Firebase web configuration and Firestore setup).
