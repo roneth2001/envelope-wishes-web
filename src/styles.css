@@ -288,4 +288,137 @@ h1 em, h2 em { color: var(--primary); font-weight: 400; }
   .reason { max-width: 290px; margin: auto; }
   .wish-form h3 { font-size: 21px; }
 }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+/* Light, living stationery. Decorative motion stays separate from readable content. */
+.birthday-header { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 16px; }
+.brand { min-width: 0; }
+.brand > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.brand svg, .header-heart { flex-shrink: 0; }
+.header-heart { justify-self: end; }
+.birthday-header, .wall-heading, .eyebrow, .invitation-bottom, .header-note, .envelope-address span { letter-spacing: 0; }
+.envelope-page > .romantic-details, .card-welcome > .romantic-details { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.romantic-details svg { position: absolute; width: 22px; height: 22px; color: var(--primary); opacity: .3; stroke-width: 1.2; animation: drift-detail 7s ease-in-out infinite; }
+.romantic-details svg:nth-child(1) { top: 18%; left: 9%; transform: rotate(-18deg); }
+.romantic-details svg:nth-child(2) { top: 12%; right: 13%; width: 28px; height: 28px; animation-delay: -2s; }
+.romantic-details svg:nth-child(3) { top: 65%; left: 15%; width: 15px; height: 15px; animation-delay: -4s; }
+.romantic-details svg:nth-child(4) { top: 52%; right: 8%; color: var(--sage); width: 30px; height: 30px; animation-delay: -1s; }
+.romantic-details svg:nth-child(5) { bottom: 12%; right: 22%; width: 16px; height: 16px; animation-delay: -3s; }
+.romantic-details svg:nth-child(6) { bottom: 8%; left: 7%; animation-delay: -5s; }
+.celebrate svg { animation: birthday-bloom 1.5s ease-out both, drift-detail 7s 1.5s ease-in-out infinite; }
+.envelope-wrap { animation: envelope-arrive 1s ease-out both; }
+.wax-seal svg { animation: loving-beat 3s ease-in-out infinite; }
+.birthday-button { position: relative; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; }
+.birthday-button::after { content: ''; position: absolute; top: 0; bottom: 0; width: 45%; left: -70%; background: linear-gradient(100deg, transparent, oklch(from var(--primary-foreground) l c h / .18), transparent); transform: skewX(-20deg); animation: ribbon-shine 7s 2s ease-in-out infinite; pointer-events: none; }
+.birthday-button:active { transform: scale(.98); }
+.birthday-button:focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; }
+.scroll-cue svg { animation: float-heart 2.5s ease-in-out infinite; }
+.letter-layout, .wishes-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
+.letter-layout > *, .wishes-layout > *, .reason, .wish-form h3 { min-width: 0; }
+.wall-heading { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; }
+.wall-heading > span:first-child { min-width: 0; }
+.wall-heading > span:last-child, .wish-author svg, .wish-form h3 svg { flex-shrink: 0; }
+.wish-author { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+.reveal-on-scroll { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+@keyframes drift-detail { 0%, 100% { translate: 0 0; } 50% { translate: 3px -14px; } }
+@keyframes loving-beat { 0%, 75%, 100% { scale: 1; } 80% { scale: 1.12; } 88% { scale: 1; } 93% { scale: 1.08; } }
+@keyframes ribbon-shine { 0%, 75% { left: -70%; } 100% { left: 140%; } }
+@keyframes envelope-arrive { from { opacity: 0; translate: 0 18px; } to { opacity: 1; translate: 0 0; } }
+@keyframes birthday-bloom { from { opacity: 0; scale: .3; } to { opacity: .3; scale: 1; } }
+@media (hover: hover) {
+  .birthday-button:hover { transform: translateY(-2px); box-shadow: var(--paper-shadow); }
+  .reason svg { transition: transform .3s ease; }
+  .reason:hover svg { transform: rotate(-10deg) scale(1.12); }
+}
+@media (max-width: 768px) {
+  .birthday-header { height: 56px; padding: 0 20px; grid-template-columns: minmax(0, 1fr) auto; }
+  .brand { font-size: 15px; gap: 8px; }
+  .header-note { display: none; }
+  .envelope-page { min-height: calc(100svh - 56px); padding: 28px 22px 18px; }
+  .invitation-intro { width: 100%; }
+  .invitation-intro h1 { font-size: 35px; line-height: 1.16; margin: 14px 0 12px; }
+  .invitation-intro h1 em { display: block; font-size: 44px; margin-top: 2px; }
+  .invitation-intro p { font-size: 12px; line-height: 1.7; margin: 0; }
+  .eyebrow { font-size: 9px; gap: 8px; line-height: 1.6; letter-spacing: 0; }
+  .eyebrow > span { width: 16px; flex-shrink: 0; }
+  .envelope-wrap { width: 310px; max-width: calc(100% - 22px); margin: 32px 0 23px; }
+  .envelope-address { font-size: 26px; bottom: 20px; }
+  .envelope-address span { font-size: 7px; line-height: 1.5; }
+  .wax-seal { width: 46px; height: 46px; left: calc(50% - 23px); top: 36%; }
+  .wax-seal svg { width: 20px; }
+  .envelope-caption { font-size: 21px; margin-top: 18px; }
+  .heart-one { left: -15px; top: 32px; }
+  .heart-two { right: -14px; top: 6px; }
+  .letter-peek { font-size: 25px; gap: 10px; }
+  .open-action { width: min(100%, 340px); gap: 10px; }
+  .birthday-button { min-height: 50px; height: auto; padding: 13px 18px; font-size: 12px; gap: 10px; }
+  .open-action .birthday-button { width: 100%; }
+  .open-action > span { font-size: 10px; line-height: 1.5; }
+  .invitation-bottom { padding-top: 22px; gap: 8px; font-size: 8px; }
+  .romantic-details svg:nth-child(1) { left: 4%; top: 23%; width: 16px; }
+  .romantic-details svg:nth-child(2) { right: 4%; top: 17%; width: 20px; }
+  .romantic-details svg:nth-child(3) { left: 5%; top: 69%; }
+  .romantic-details svg:nth-child(4) { right: 3%; top: 62%; width: 22px; }
+  .romantic-details svg:nth-child(5), .romantic-details svg:nth-child(6) { display: none; }
+  .card-welcome { min-height: calc(100svh - 112px); padding: 42px 24px 28px; }
+  .card-welcome > .script-line { margin-top: 24px; font-size: 29px; }
+  .card-welcome h1 { font-size: 48px; line-height: 1.2; margin: 14px 0; }
+  .card-welcome h1 em { font-size: 68px; }
+  .welcome-heart { right: -19px; bottom: 15px; width: 23px; }
+  .card-welcome p { font-size: 13px; line-height: 1.8; max-width: 310px; }
+  .card-welcome p br { display: none; }
+  .scroll-cue { margin-top: 20px; font-size: 11px; min-height: 54px; }
+  .content-section { padding: 46px 24px; }
+  .content-section h2 { font-size: 30px; line-height: 1.3; margin: 16px 0 20px; }
+  .letter-layout, .wishes-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .letter-layout { margin-top: 10px; }
+  .letter-layout > div > .script-line { font-size: 25px; }
+  .letter-heart { display: none; }
+  .letter-copy { border-top: 1px solid var(--border); padding-top: 25px; }
+  .letter-copy p { font-size: 14px; line-height: 1.9; }
+  .letter-copy .signature { font-size: 12px; }
+  .reasons-grid { grid-template-columns: minmax(0, 1fr); gap: 0; margin-top: 28px; text-align: left; }
+  .reason { display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 16px; padding: 24px 0; max-width: none; width: 100%; border-top: 1px solid var(--border); }
+  .reason svg { grid-row: span 2; margin: 2px auto 0; }
+  .reason h3 { font-size: 22px; margin: 0 0 10px; }
+  .reason p { font-size: 13px; line-height: 1.8; margin: 0; }
+  .birthday-wish p { font-size: 14px; }
+  .section-subtitle { font-size: 13px; }
+  .wishes-layout { margin-top: 30px; gap: 40px; }
+  .wish-form h3 { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; font-size: 22px; }
+  .wish-form label { font-size: 13px; }
+  .wish-form input, .wish-form textarea { font-size: 16px; padding: 13px; }
+  .wish-form input { min-height: 48px; }
+  .character-count { font-size: 11px; }
+  .form-status, .connection-note { font-size: 12px; }
+  .wall-heading { font-size: 14px; }
+  .wall-heading > span:last-child { font-size: 12px; align-items: center; }
+  .wish-note p { font-size: 14px; }
+  .wish-author { font-size: 13px; }
+  .empty-wishes { padding: 36px 8px; }
+  .empty-wishes p { font-size: 13px; }
+  .birthday-footer { font-size: 12px; }
+  .birthday-footer button { min-height: 44px; font-size: 12px; }
+}
+@media (max-width: 360px) {
+  .envelope-page { padding-inline: 18px; }
+  .invitation-intro h1 { font-size: 31px; }
+  .invitation-intro h1 em { font-size: 40px; }
+  .envelope-address { font-size: 23px; bottom: 17px; }
+  .envelope-address span { font-size: 6px; }
+  .card-welcome h1 { font-size: 41px; }
+  .card-welcome h1 em { font-size: 59px; }
+  .content-section { padding-inline: 20px; }
+  .content-section h2 { font-size: 27px; }
+}
+@media (max-width: 768px) and (max-height: 700px) {
+  .envelope-page { padding-top: 20px; }
+  .envelope-wrap { width: 280px; margin-top: 24px; margin-bottom: 18px; }
+  .invitation-bottom { padding-top: 16px; }
+  .card-welcome { padding-top: 30px; }
+  .card-welcome > .script-line { margin-top: 18px; }
+  .scroll-cue { margin-top: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .reveal-on-scroll { opacity: 1; transform: none; }
+}
