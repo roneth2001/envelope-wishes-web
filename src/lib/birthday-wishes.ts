@@ -8,19 +8,19 @@ export const wishSchema = z.object({
 export type BirthdayWish = { id: string; name: string; message: string };
 
 export const firebaseConfigured = Boolean(
-  import.meta.env.VITE_FIREBASE_API_KEY &&
-  import.meta.env.VITE_FIREBASE_PROJECT_ID &&
-  import.meta.env.VITE_FIREBASE_APP_ID,
+  import.meta.env['VITE_FIREBASE_API_KEY'] &&
+  import.meta.env['VITE_FIREBASE_PROJECT_ID'] &&
+  import.meta.env['VITE_FIREBASE_APP_ID'],
 );
 
 async function getWishesCollection() {
   const { getApps, initializeApp } = await import('firebase/app');
   const { getFirestore, collection } = await import('firebase/firestore');
   const app = getApps()[0] ?? initializeApp({
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    apiKey: import.meta.env['VITE_FIREBASE_API_KEY'],
+    authDomain: import.meta.env['VITE_FIREBASE_AUTH_DOMAIN'],
+    projectId: import.meta.env['VITE_FIREBASE_PROJECT_ID'],
+    appId: import.meta.env['VITE_FIREBASE_APP_ID'],
   });
   return collection(getFirestore(app), 'birthdayWishes');
 }
