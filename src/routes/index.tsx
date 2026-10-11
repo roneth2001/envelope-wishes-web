@@ -74,7 +74,7 @@ function Index() {
         <span className="eyebrow"><Sparkles size={14} /> YOUR DAY. YOUR LITTLE WORLD.</span>
         <span className="script-line">Here's to you, my love</span>
         <h1>Happy birthday,<br /><em>Pavii.</em><Heart className="welcome-heart" size={36} /></h1>
-        <p>To the girl who makes ordinary days feel extraordinary.<br />This little corner of the world is yours.</p>
+        <p>To the girl who makes ordinary days feel extraordinary.<br />{' '}This little corner of the world is yours.</p>
         <Button variant="ghost" className="scroll-cue" onClick={() => document.getElementById('letter')?.scrollIntoView({ behavior: 'smooth' })}>A little love, just below<ArrowDown size={18} /></Button>
       </section>
       <section className="love-letter content-section" id="letter"><span className="eyebrow">01 / A NOTE FROM MY HEART</span>
