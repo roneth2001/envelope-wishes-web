@@ -142,3 +142,150 @@
     color: var(--color-foreground);
   }
 }
+
+/* Pavii's stationery: warm rose ink, pale paper, and tactile folded paper. */
+:root {
+  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --font-script: 'Great Vibes', cursive;
+  --paper: oklch(0.996 0.003 12);
+  --blush: oklch(0.963 0.018 13);
+  --envelope: oklch(0.925 0.036 15);
+  --envelope-front: oklch(0.94 0.03 15);
+  --envelope-flap: oklch(0.96 0.025 15);
+  --rose-ink: oklch(0.48 0.07 10);
+  --seal: oklch(0.64 0.11 11);
+  --sage: oklch(0.56 0.045 151);
+  --paper-shadow: 0 24px 42px -20px oklch(0.52 0.06 15 / 0.24);
+  --seal-shadow: 0 3px 8px oklch(0.45 0.06 10 / 0.25), inset 0 0 0 4px oklch(0.73 0.08 11 / 0.4), inset 0 0 0 6px oklch(0.48 0.09 11 / 0.2);
+}
+body { font-family: var(--font-body); margin: 0; letter-spacing: 0; }
+button, input, textarea { font: inherit; }
+.birthday-app { min-height: 100dvh; }
+.birthday-header { height: 86px; padding: 0 5%; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); background: var(--paper); }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 17px; text-decoration: none; color: var(--rose-ink); }
+.brand svg { color: var(--primary); }
+.brand-comma { margin-right: 3px; }
+.header-note { font-size: 9px; letter-spacing: 2px; color: var(--muted-foreground); }
+.header-heart { color: var(--primary); }
+.envelope-page { position: relative; min-height: calc(100dvh - 86px); overflow: hidden; display: flex; align-items: center; flex-direction: column; padding: 58px 20px 24px; }
+.paper-background { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .48; z-index: 0; pointer-events: none; }
+.envelope-page > :not(.paper-background), .card-welcome > :not(.paper-background) { position: relative; z-index: 1; }
+.invitation-intro { text-align: center; }
+.eyebrow { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 9px; font-weight: 500; letter-spacing: 2.4px; color: var(--primary); }
+.eyebrow > span { width: 23px; height: 1px; background: var(--primary); opacity: .5; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: 0; }
+h1 { font-size: 53px; line-height: 1.22; margin: 18px 0 18px; }
+h1 em, h2 em { color: var(--primary); font-weight: 400; }
+.invitation-intro p, .card-welcome p { font-size: 13px; line-height: 1.95; color: var(--muted-foreground); }
+.envelope-wrap { width: 440px; max-width: calc(100vw - 66px); margin: 62px 0 40px; text-align: center; }
+.envelope { position: relative; width: 100%; aspect-ratio: 1.62; filter: drop-shadow(var(--paper-shadow)); perspective: 900px; transform: rotate(-4deg); transition: transform 1s; }
+.envelope-back { position: absolute; inset: 0; background: var(--envelope); border-radius: 5px; }
+.envelope-front { position: absolute; inset: 0; background: var(--envelope-front); clip-path: polygon(0 0, 50% 47%, 100% 0, 100% 100%, 0 100%); border-radius: 5px; z-index: 3; }
+.envelope-front::after { content: ''; position: absolute; inset: 0; background: var(--envelope-flap); clip-path: polygon(0 100%, 50% 45%, 100% 100%); opacity: .45; }
+.envelope-flap { position: absolute; inset: 0; background: var(--envelope-flap); clip-path: polygon(0 0, 100% 0, 50% 54%); transform-origin: top; z-index: 4; transition: transform .65s ease, z-index .3s .3s; }
+.wax-seal { width: 61px; height: 61px; border-radius: 50%; position: absolute; left: calc(50% - 30px); top: 40%; background: var(--seal); color: var(--envelope-flap); box-shadow: var(--seal-shadow); display: flex; align-items: center; justify-content: center; z-index: 5; transition: opacity .25s; }
+.wax-seal svg { width: 22px; opacity: .9; }
+.envelope-address { position: absolute; bottom: 34px; left: 10px; right: 10px; z-index: 4; font-family: var(--font-script); font-size: 29px; color: var(--rose-ink); }
+.envelope-address span { display: block; font-family: var(--font-body); font-size: 7px; letter-spacing: 1px; margin-top: 5px; color: var(--muted-foreground); }
+.letter-peek { position: absolute; background: var(--paper); width: 86%; left: 7%; top: 8%; height: 85%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px; font-family: var(--font-script); font-size: 29px; color: var(--primary); transition: transform .7s .25s; z-index: 2; }
+.envelope-caption { display: block; font-family: var(--font-script); font-size: 23px; color: var(--muted-foreground); transform: rotate(-5deg); margin-top: 34px; }
+.floating-heart { position: absolute; color: var(--primary); opacity: .45; font-size: 35px; animation: float-heart 5s ease-in-out infinite; }
+.heart-one { left: -50px; top: 80px; transform: rotate(-20deg); }
+.heart-two { right: -48px; top: 15px; font-size: 27px; animation-delay: -2s; }
+.birthday-button { border-radius: 5px; height: 47px; padding: 0 24px; font-size: 11px; font-weight: 500; box-shadow: none; gap: 12px; }
+.open-action { text-align: center; display: flex; flex-direction: column; gap: 15px; align-items: center; }
+.open-action > span { font-size: 10px; color: var(--muted-foreground); }
+.invitation-bottom { display: flex; align-items: center; justify-content: center; gap: 13px; margin-top: auto; padding-top: 52px; font-size: 8px; letter-spacing: 1.8px; color: var(--muted-foreground); }
+.tiny-sparkle { font-size: 19px; color: var(--primary); }
+.is-opening .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+.is-opening .wax-seal { opacity: 0; }
+.is-opening .letter-peek { transform: translateY(-56%); }
+.is-opening .envelope { transform: rotate(0); }
+.opened-card { animation: reveal-card .8s ease both; }
+.card-welcome { position: relative; overflow: hidden; text-align: center; padding: 80px 20px 45px; min-height: 640px; display: flex; flex-direction: column; align-items: center; }
+.script-line { display: block; font-family: var(--font-script); color: var(--primary); font-size: 31px; }
+.card-welcome > .script-line { margin-top: 34px; }
+.card-welcome h1 { font-size: 76px; margin-top: 8px; position: relative; }
+.welcome-heart { position: absolute; right: -56px; bottom: 24px; transform: rotate(17deg); color: var(--primary); }
+.scroll-cue { flex-direction: column; height: auto; margin-top: 34px; padding: 12px; font-size: 10px; color: var(--primary); gap: 10px; }
+.content-section { padding: 80px max(6%, calc((100% - 980px)/2)); }
+.content-section h2 { font-size: 39px; line-height: 1.35; margin: 18px 0 24px; }
+.love-letter { background: var(--paper); }
+.love-letter > .eyebrow { justify-content: flex-start; }
+.letter-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; margin-top: 20px; }
+.letter-layout > div > .script-line { font-size: 25px; }
+.letter-heart { margin-top: 42px; color: var(--primary); transform: rotate(-14deg); }
+.letter-copy p { font-size: 13px; line-height: 2; margin-bottom: 18px; color: var(--muted-foreground); }
+.letter-copy .salutation { color: var(--rose-ink); font-family: var(--font-display); font-size: 20px; }
+.letter-copy .signature { font-size: 10px; display: block; margin-top: 5px; color: var(--muted-foreground); }
+.little-things { text-align: center; background: var(--blush); }
+.reasons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 38px; margin-top: 48px; }
+.reason { padding: 16px 12px; }
+.reason svg { margin: 0 auto 22px; color: var(--primary); }
+.reason:nth-child(3) svg { color: var(--sage); }
+.reason h3 { font-size: 21px; margin-bottom: 14px; }
+.reason p { font-size: 12px; line-height: 1.9; color: var(--muted-foreground); }
+.birthday-wish { text-align: center; background: var(--paper); }
+.birthday-wish > svg { margin: 0 auto 25px; color: var(--primary); }
+.birthday-wish p { font-size: 13px; line-height: 1.9; color: var(--muted-foreground); margin-bottom: 30px; }
+.wishes-section { border-top: 1px solid var(--border); text-align: center; }
+.section-subtitle { font-size: 12px; color: var(--muted-foreground); line-height: 1.8; }
+.wishes-layout { display: grid; grid-template-columns: 1fr 1.15fr; gap: 55px; margin-top: 44px; text-align: left; align-items: start; }
+.wish-form { display: flex; flex-direction: column; }
+.wish-form h3 { font-size: 22px; display: flex; align-items: center; gap: 12px; margin-bottom: 25px; }
+.wish-form h3 svg { color: var(--primary); }
+.wish-form label { font-size: 11px; margin-bottom: 9px; }
+.wish-form input, .wish-form textarea { width: 100%; border: 1px solid var(--input); background: var(--paper); border-radius: 5px; font-size: 12px; padding: 14px; outline: none; color: var(--foreground); }
+.wish-form input { margin-bottom: 22px; }
+.wish-form textarea { resize: vertical; }
+.wish-form input:focus, .wish-form textarea:focus { border-color: var(--ring); }
+.wish-form input::placeholder, .wish-form textarea::placeholder { color: var(--muted-foreground); opacity: .8; }
+.character-count { font-size: 9px; text-align: right; color: var(--muted-foreground); margin: 8px 0 20px; }
+.form-status, .connection-note { font-size: 11px; line-height: 1.7; color: var(--muted-foreground); margin-top: 14px; }
+.wall-heading { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding: 5px 0 19px; font-size: 12px; }
+.wall-heading > span:last-child { font-size: 10px; display: flex; gap: 8px; color: var(--muted-foreground); }
+.empty-wishes { text-align: center; padding: 60px 20px; }
+.empty-wishes > svg { color: var(--primary); margin: 0 auto 20px; }
+.empty-wishes h3 { font-size: 21px; }
+.empty-wishes p { font-size: 11px; margin: 13px 0 25px; color: var(--muted-foreground); }
+.empty-wishes .script-line { font-size: 27px; }
+.wish-note { background: var(--paper); border: 1px solid var(--border); border-radius: 5px; padding: 22px; margin-top: 16px; }
+.wish-quote { font-family: var(--font-display); color: var(--primary); font-size: 32px; line-height: 1; }
+.wish-note p { font-size: 12px; line-height: 1.9; white-space: pre-wrap; overflow-wrap: anywhere; }
+.wish-author { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; font-size: 11px; color: var(--primary); overflow-wrap: anywhere; gap: 12px; }
+.birthday-footer { border-top: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 35px 20px; font-size: 11px; color: var(--muted-foreground); }
+.birthday-footer > svg { color: var(--primary); }
+.birthday-footer .btn, .birthday-footer button { font-size: 10px; }
+@keyframes float-heart { 0%, 100% { translate: 0 0; } 50% { translate: 0 -9px; } }
+@keyframes reveal-card { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@media (min-height: 1000px) { .envelope-page { padding-top: 90px; } .envelope-wrap { margin-top: 85px; margin-bottom: 60px; } }
+@media (max-width: 640px) {
+  .birthday-header { height: 68px; padding: 0 22px; }
+  .brand { font-size: 15px; }
+  .header-note { display: none; }
+  .envelope-page { min-height: calc(100dvh - 68px); padding-top: 48px; }
+  h1 { font-size: 38px; }
+  .invitation-intro p { font-size: 12px; }
+  .eyebrow { font-size: 8px; letter-spacing: 1.8px; }
+  .envelope-wrap { width: 320px; margin-top: 65px; margin-bottom: 32px; }
+  .envelope-address { font-size: 25px; bottom: 23px; }
+  .envelope-address span { font-size: 6px; }
+  .wax-seal { width: 48px; height: 48px; left: calc(50% - 24px); top: 39%; }
+  .heart-one { left: -20px; top: 40px; font-size: 25px; }
+  .heart-two { right: -18px; font-size: 22px; }
+  .envelope-caption { font-size: 21px; margin-top: 29px; }
+  .invitation-bottom { padding-top: 36px; font-size: 7px; }
+  .card-welcome { min-height: 580px; padding-top: 60px; }
+  .card-welcome h1 { font-size: 57px; }
+  .welcome-heart { right: -34px; width: 25px; }
+  .card-welcome p { font-size: 12px; }
+  .content-section { padding: 55px 25px; }
+  .content-section h2 { font-size: 31px; }
+  .letter-layout, .wishes-layout { grid-template-columns: 1fr; gap: 35px; }
+  .letter-heart { display: none; }
+  .reasons-grid { grid-template-columns: 1fr; gap: 26px; margin-top: 26px; }
+  .reason { max-width: 290px; margin: auto; }
+  .wish-form h3 { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
